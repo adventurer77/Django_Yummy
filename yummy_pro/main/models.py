@@ -11,18 +11,20 @@ class DishCategory(models.Model):
         return self.name
     
 
-
-
 class Events(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    title = models.CharField(max_length=50, unique=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    description = models.TextField(max_length=400, blank=True)
+    description = models.TextField(max_length=400, blank=False)
     is_visible = models.BooleanField(default=True)
     # image = models.ImageField(upload_to=)
 
     class Meta:
 
         ordering = ("price",)
+
+
+    def __str__(self):
+        return self.title
     
     # def __str__(self) -> str:
     #     description_snippet = self.description[:20] + "..." if len(self.description) > 20 else self.description

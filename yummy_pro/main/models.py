@@ -24,9 +24,9 @@ class Events(models.Model):
 
         ordering = ("price",)
     
-    def __str__(self) -> str:
-        description_snippet = self.description[:20] + "..." if len(self.description) > 20 else self.description
-        return f"{self.name} (Price: {self.price:.2f}, Description: {description_snippet})"
+    # def __str__(self) -> str:
+    #     description_snippet = self.description[:20] + "..." if len(self.description) > 20 else self.description
+    #     return f"{self.name} (Price: {self.price:.2f}, Description: {description_snippet})"
 
 
 class Personnel(models.Model):
@@ -36,8 +36,8 @@ class Personnel(models.Model):
     salary = models.DecimalField(max_digits=8)
     employee_status = models.BooleanField(default=True)
 
-    def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+    # def __str__(self) -> str:
+    #     return f"{self.first_name} {self.last_name}"
 
 
 # class Gallery(models.Model):

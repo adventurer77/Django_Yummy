@@ -68,22 +68,42 @@ class Events(models.Model):
 
 
 class Staff(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    position = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
     description = models.TextField(max_length=400, blank=True, null=True)
     is_visible = models.BooleanField(default=True)
     image = models.ImageField(upload_to="staff/", blank=True, null=True)
+    sort = models.PositiveSmallIntegerField()
+    
 
     class Meta:
         verbose_name = "Person"
         verbose_name_plural = "Staff"
+        ordering = ['sort']
         
-    # def __str__(self):
-    #     return self.first_name
+    def __iter__(self):
+        for item in self.staff.all(): # V3
+            yield item
 
     def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+        return self.name
+    
+
+
+
+class ChefSocialMediaLink(models.Model):
+    chef = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name="staff") 
+    platform = models.CharField(max_length=20)  
+    url = models.URLField(blank=True, null=True)  
+    sort = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return f"{self.chef.name} - {self.platform}"
+    
+    class Meta:
+        verbose_name = "Platform"
+        verbose_name_plural = "Platforms"
+        ordering = ['sort']
 
 
 class Gallery(models.Model):

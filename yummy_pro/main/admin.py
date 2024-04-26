@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DishCategory,Dish,Gallery,Staff,Events,Contacts
+from .models import DishCategory,Dish,Gallery,Staff,ChefSocialMediaLink,Events,Contacts
 from django.utils.safestring import mark_safe
 
 
@@ -49,17 +49,26 @@ class EventsAdmin(admin.ModelAdmin):
 # admin.site.register(Staff)
 @admin.register(Staff)
 class StaffAdmin(admin.ModelAdmin):
-    list_display = ("photo_src_tag","first_name", "last_name","position","description", "is_visible")
+    list_display = ("photo_src_tag","name","position","description", "is_visible",'sort')
 
-    list_editable = ("first_name", "last_name","position","description", "is_visible")
+    list_editable = ("name","position","description", "is_visible",'sort')
     list_filter = ("is_visible",)
-    search_fields = ("first_name", "last_name","position")
+    search_fields = ("name","position")
 
     def photo_src_tag(self,obj):
         if obj.image:
             return mark_safe(f"<img src='{obj.image.url}' width=50 height=50>")
     
     photo_src_tag.short_description = "Staff photo"
+
+
+@admin.register(ChefSocialMediaLink)
+class ChefSocialMediaLinkAdmin(admin.ModelAdmin):
+    list_display = ('chef', 'platform', 'url')
+    list_editable = ('platform', 'url')
+    search_fields = ('platform', 'url')
+    list_filter = ('chef',)
+
 
 # admin.site.register(Gallery) 
 @admin.register(Gallery)

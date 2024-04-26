@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import DishCategory,Dish,Gallery,Staff,Events,Contacts
+from .models import DishCategory,Dish,Gallery,Staff,ChefSocialMediaLink,Events,Contacts
 
 # Create your views here.
 
@@ -33,14 +33,14 @@ def index(request):
     contacts = Contacts.objects.first()
 
 
-    # contact_details = []
-    # if contacts: 
-    contacts = [
-                { "title": "Our Address", "content": contacts.address},
-                { "title": "Email Us", "content": contacts.email},
-                {  "title": "Call Us", "content": contacts.phone_number},
-                {  "title": "Opening Hours", "content": contacts.opening_hours},
-            ]
+    contact_details = []
+    if contacts: 
+        contact_details = [
+                    { "title": "Our Address", "content": contacts.address},
+                    { "title": "Email Us", "content": contacts.email},
+                    {  "title": "Call Us", "content": contacts.phone_number},
+                    {  "title": "Opening Hours", "content": contacts.opening_hours},
+                ]
 
     context = {
         'title_menu': 'Check Our <span>Yummy Menu</span>',
@@ -54,7 +54,7 @@ def index(request):
         "staff" : staff,
         "events" : events,
         "contacts": contacts,
-        # "contact_details" : contact_details,
+        "contact_details" : contact_details,
     }
     
     return render(request, "main.html", context=context)

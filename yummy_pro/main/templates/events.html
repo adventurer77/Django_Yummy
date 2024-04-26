@@ -1,5 +1,5 @@
 
-<section id="events" class="events">
+ <section id="events" class="events">
     <div class="container-fluid" data-aos="fade-up">
 
       <div class="section-header">
@@ -9,14 +9,14 @@
 
       <div class="slides-3 swiper"  data-aos="fade-up" data-aos-delay="100">
         <div class="swiper-wrapper">
-          {% for item in events  %}
-          <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url({{item.image.url}})">
-            <h3>{{item.title }}</h3>
-            <div class="price align-self-start">{{item.price }}</div>
-            <p class="description">
-              {{item.description  }}
-            </p>
-          </div><!-- End Event item -->
+          {% for item in events %}
+            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url({{item.image.url}})">
+              <h3>{{item.title}}</h3>
+              <div class="price align-self-start">{{item.price}}</div>
+              <p class="description">
+                {{item.description}}
+              </p>
+            </div><!-- End Event item -->
           {% endfor %}
           
 
@@ -25,4 +25,4 @@
       </div>
 
     </div>
-  </section><!-- End Events Section -->
+ </section><!-- End Events Section -->

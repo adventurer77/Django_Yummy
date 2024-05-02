@@ -48,7 +48,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <a href="{% url "index" %}" class="logo d-flex align-items-center me-auto me-lg-0">
+      <a href="{% url "main:index" %}" class="logo d-flex align-items-center me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>{{ app_title|safe }}</h1>
@@ -61,6 +61,10 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
     </div>
+    <div>
+      {% include 'includes/messages.html' %}
+    </div>
+    
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->

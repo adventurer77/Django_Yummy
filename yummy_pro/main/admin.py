@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DishCategory,Dish,Gallery,Staff,ChefSocialMediaLink,Events,Contacts
+from .models import DishCategory,Dish,Gallery,Staff,ChefSocialMediaLink,Events,Contacts,Reservation
 from django.utils.safestring import mark_safe
 
 
@@ -93,3 +93,6 @@ class ContactsAdmin(admin.ModelAdmin):
 
     list_editable = ("email","phone_number","opening_hours")
     search_fields = ("address",)
+
+
+admin.site.register(Reservation)

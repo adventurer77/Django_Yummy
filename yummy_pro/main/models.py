@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import RegexValidator
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -125,7 +127,7 @@ class Contacts(models.Model):
     address = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=20, help_text='Enter phone number')
-    opening_hours = models.TextField(blank=True)
+    opening_hours = RichTextField(blank=True)
 
     class Meta:
         verbose_name = "Contact"
@@ -134,3 +136,31 @@ class Contacts(models.Model):
 
     def __str__(self):
         return self.address 
+    
+
+
+class Reservation(models.Model):
+    phone_regex = RegexValidator(regex=r"^\+?(380)?\d{9,15}$",
+                                message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20, validators=[phone_regex])
+    email = models.EmailField()
+    date = models.DateField()
+    time = models.TimeField()
+    count = models.PositiveSmallIntegerField()
+    comment = models.TextField(blank=True, null=True)
+
+    is_confirmed = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f'{self.name} - {self.date} {self.time}'
+
+    
+    class Meta:
+        verbose_name = "Reservation"
+        verbose_name_plural = "Reservation"
+        ordering = ["-date_created"]
+
